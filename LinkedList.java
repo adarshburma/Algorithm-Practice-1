@@ -148,6 +148,32 @@ public class LinkedList {
         }
     }
 
+    public Node partitionList(){
+        Node fast = head;
+        Node slow = head;
+
+        if(head == null){
+            return null;
+        }
+
+        while(fast != null){
+            if(fast.next != null){
+                fast = fast.next;
+            }else{
+                break;
+            }
+
+            if(fast.next != null){
+                fast = fast.next;
+                slow = slow.next;
+            }else{
+                break;
+            }
+        }
+
+        return slow;
+    }
+
     public void printListFrom(Node node) {
         Node current = node;
         while(current != null){
