@@ -4,6 +4,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetectUniqueElements {
+    
+    static class LinkedListQueue{
+        Node front, rear;
+        class Node{
+            int data;
+            Node next;
+
+            Node(int data){
+                this.data = data;
+            }
+        }
+        void enqueue(int data){
+            Node newNode = new Node(data);
+            if(rear == null){
+                front = newNode;
+                rear = newNode;
+                return;
+            }
+
+            rear.next = newNode;
+            rear = newNode;
+        }
+
+        int deQueue(){
+            if(front == null){
+                return -1;
+            }
+            int data = front.data;
+            front = front.next;
+
+            if(front == null){
+                rear = null;
+            }
+            return data;
+        }
+
+        void printQueue(){
+            Node current = front;
+            while(current != null){
+                System.out.println(current.data);
+                current = current.next;
+            }
+        }
+    }
+
 
     public static class Node{
         int data;
