@@ -1,43 +1,45 @@
 package com.iheartmedia.salesforce.config.handler;
 
 public class ZigZagPattern {
-
-    public void zigzagPattern(String str, int numRows){
+    public String convert(String s, int numRows) {
         if(numRows == 1){
-            System.out.println(str);
-            return;
+           return s;
         }
+        int row = 0;
         String[] arr = new String[numRows];
         boolean down = true;
-        int row = 0;
-        for(int i = 0; i<str.length(); i++){
+        for(int i = 0 ; i< s.length(); i++){
             if(arr[row] == null){
-                arr[row] = str.charAt(i)+ " ";
+                arr[row] = Character.toString(s.charAt(i));
             }else{
-                arr[row] =arr[row] +  str.charAt(i)+ " ";
+                arr[row] = arr[row] + Character.toString(s.charAt(i));
             }
-
-            if(row == numRows -1){
+            
+            if(row == numRows-1){
                 down = false;
             }
-
+            
             if(row == 0){
                 down = true;
             }
-
+            
             if(down){
                 row++;
             }else{
                 row--;
             }
         }
-        for(String s : arr){
-            System.out.println(s);
+        String str = "";
+        for(String sarr: arr){
+            if(sarr != null){
+               str = str + sarr; 
+            } 
         }
+        return str;
     }
 
     public static void main(String args[]){
         ZigZagPattern zigZagPattern = new ZigZagPattern();
-        zigZagPattern.zigzagPattern("GEEKFORGEEKS", 3);
+        zigZagPattern.convert("GEEKFORGEEKS", 3);
     }
 }
