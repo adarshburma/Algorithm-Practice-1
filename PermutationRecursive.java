@@ -34,18 +34,34 @@ public class PermutationRecursive {
     public static void main(String args[]){
         PermutationRecursive permutationRecursive = new PermutationRecursive();
         int[] arr = new int[] {1,2,3,6,4,5,9,10};
-        permutationRecursive.permutations2(arr, 0, arr.length-1);
+        String input = "ROAD";
+        char[] input2 = input.toCharArray();
+        permutationRecursive.permutations2(input2, 0, input2.length-1);
         System.out.println("Count is:" + permutationRecursive.count);
     }
 
-    public void permutations2(int[] arr, int k , int n){
+    public void printChar(char[] arr){
+        count++;
+        for(char c : arr){
+            System.out.print(c);
+        }
+        System.out.println();
+    }
+
+    public void swapChar(char[] arr, int k , int j){
+        char t = arr[k];
+        arr[k] = arr[j];
+        arr[j] = t;
+    }
+
+    public void permutations2(char[] arr, int k , int n){
         if(k == n){
-            print(arr);
+            printChar(arr);
         }else{
             for(int i =k; i <= n; i++){
-                swap(arr, k, i);
+                swapChar(arr, k, i);
                 permutations2(arr, k+1, n);
-                swap(arr, i, k);
+                swapChar(arr, i, k);
             }
         }
     }
