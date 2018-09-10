@@ -2,6 +2,30 @@ package org.practice.courses.courseapi;
 
 public class PermutationRecursive {
     int count= 0;
+    
+      public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        return permutations(nums, 0, nums.length, result);
+      
+    }
+    
+    public List<List<Integer>> permutations(int[] nums, int k , int n, List<List<Integer>> result){
+          if(k == n){
+            List<Integer> inner = new ArrayList<>();
+            for(int i = 0 ; i< nums.length ; i++){
+                inner.add(nums[i]);
+            }
+            result.add(inner);
+            return result;
+        }
+
+        for(int i=k ; i< n; i++){
+            swap(nums, k, i);
+            permutations(nums, k+1, n, result);
+            swap(nums, k, i);
+        }
+        return result;
+    }
 
     public void swap (int[] arr, int k, int j){
         int t = arr[k];
