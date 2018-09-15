@@ -3,6 +3,21 @@ package org.practice.courses.courseapi;
 import java.util.Stack;
 
 public class NextLargestElement {
+
+    public static int[] findNextLargest(int[] arr){
+        int[] res = new int[arr.length];
+        for(int i = 0 ; i < arr.length; i++){
+            res[i] = -1;
+            for(int j = 1; j< arr.length ; j++){
+                if(arr[(i+j) % arr.length] >= arr[i]){
+                    res[i] = arr[(i+j) % arr.length];
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+
     public static int[] nextLargest2(int[] arr){
         Stack<Integer> stack = new Stack<>();
         int[] res = new int[arr.length];
@@ -33,7 +48,7 @@ public class NextLargestElement {
 
     public static void main(String args[]){
         int[] input = new int[] {1,3,2,4};
-        int[] res= nextLargest2(input);
+        int[] res= findNextLargest(input);
         for(int i = 0 ; i < input.length; i++){
             System.out.println(input[i] + " : " + res[i] );
         }
