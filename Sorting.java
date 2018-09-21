@@ -112,6 +112,34 @@ public class Sorting {
         }
     }
 
+    public static int partition(int[] arr, int low, int high){
+      int pIndex = low-1;
+      int pivot = arr[high];
+      int temp = 0;
+      for(int i = low; i< high; i++){
+          if(arr[i] <= pivot){
+              pIndex++;
+              temp = arr[pIndex];
+              arr[pIndex] = arr[i];
+              arr[i] = temp;
+          }
+      }
+      int temp2 = arr[pIndex+1];
+      arr[pIndex+1] = arr[high];
+      arr[high] = temp2;
+
+      return pIndex+1;
+    }
+
+    public static void quickSort(int[] arr, int low, int high){
+        if(high > low){
+            int pivot = partition2(arr,low, high);
+            quickSort(arr, low,pivot-1);
+            quickSort(arr,pivot+1, high);
+        }
+    }
+
+
     public static void split(int[] arr, int[] firstHalf, int[] secondHalf){
         int firstHalfIndex = 0;
         int secondHalfStartIndex = firstHalf.length;
@@ -176,10 +204,39 @@ public class Sorting {
         }
     }
 
-    public static void main(String args[]){
+    public static void print(int[] arr){
+        for(int i: arr){
+            System.out.print(i + " ");
+        }
+    }
 
+    public static int partition2(int[] arr, int low, int high){
+        int pIndex = low-1;
+        int pivot = arr[high];
+        int temp = 0 ;
+
+        for(int i =low; i < high; i++){
+            if(arr[i] < pivot){
+                pIndex++;
+                temp = arr[pIndex];
+                arr[pIndex] = arr[i];
+                arr[i] = temp;
+            }
+        }
+
+        int temp2 = arr[pIndex+1];
+        arr[pIndex+1] = arr[high];
+        arr[high] = temp2;
+
+        return pIndex+1;
+    }
+
+    public static void main(String args[]){
+        int[] test = new int[] {6,2,1,7,3,8};
+        quickSort(test, 0, test.length-1);
+        print(test);
         //selectionSort(input);
-        shellSort3(input);
-        print();
+//        shellSort3(input);
+//        print();
     }
 }
