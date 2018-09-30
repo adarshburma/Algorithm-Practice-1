@@ -1,5 +1,5 @@
 package org.practice.courses.courseapi;
-/* 
+/*
 * Rank is all numbers less than a number in a array
 * */
 public class GetRankOfNumber {
@@ -18,8 +18,9 @@ public class GetRankOfNumber {
     static void track(int d){
         if(root == null){
             root = new Node(d);
+        }else{
+            insert(d, root);
         }
-        insert(d, root);
     }
 
     static void insert(int d, Node root){
