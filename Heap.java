@@ -1,5 +1,8 @@
 package com.iheartmedia.salesforce.controller.sorting;
 
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
 public class Heap {
 
     static void maxHeapify(int[] arr, int n, int i){
@@ -44,7 +47,7 @@ public class Heap {
             System.out.print(" " + i);
         }
     }
-    
+
 
     static void minHeapify(int[] arr, int n, int i){
         int left = (2*i) + 1;
@@ -66,7 +69,7 @@ public class Heap {
             minHeapify(arr, n, smallest);
         }
     }
-    
+
 
     static void sortAsc(int[] arr){
         int n = arr.length;
@@ -84,8 +87,40 @@ public class Heap {
         printArray(arr);
     }
 
+    static void ascPriorityQueue(int[] arr){
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i : arr){
+            pq.offer(i);
+        }
+        System.out.println();
+        while(!pq.isEmpty()){
+            System.out.print(" " + pq.poll());
+        }
+    }
+
+    static void descPriorityQueue(int[] arr){
+        PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                if(o1-o2 > 0){
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+        for(int i : arr){
+            pq.offer(i);
+        }
+        System.out.println();
+        while(!pq.isEmpty()){
+            System.out.print(" " + pq.poll());
+        }
+    }
+
     public static void main(String[] args){
         int[] arr = {2,4,5,1,8,10};
         sortAsc(arr);
+        descPriorityQueue(arr);
     }
 }
