@@ -1,6 +1,28 @@
 package org.practice.courses.courseapi;
 
 public class FindKthSmallestSortedMatrix {
+    
+    static int usingPriorityQueue(int[][] arr, int k){
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        for(int i= 0; i < arr.length; i++){
+            for(int j = 0 ; j < arr[0].length; j++){
+                pq.offer(arr[i][j]);
+            }
+        }
+
+        while(!pq.isEmpty()){
+
+            if(k-1 > 0){
+                pq.poll();
+                k--;
+            } else {
+                return pq.poll();
+            }
+        }
+
+        return -1;
+    }
 
     static class HeapNode{
         int val;
