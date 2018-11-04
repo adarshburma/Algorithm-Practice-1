@@ -68,8 +68,34 @@ public class MultiplicationWithout {
 
     }
 
+    static int multiplicationBetterSolution(int a, int b){
+
+        /*
+        if smaller is even for example (30, 35) , ans is double of (15,35) but if smaller is odd (31, 35) we
+        can do double of (15,35) + bigger
+        */
+
+        int bigger =  a < b ? b : a;
+        int smaller = a < b ? a : b;
+        if(smaller == 0){
+            return 0;
+        }
+
+        if(smaller == 1){
+            return bigger;
+        }
+
+        int s = smaller >> 1;
+        int evenSide = multiplicationBetterSolution(s, bigger);
+        if(smaller % 2 == 0){
+            return evenSide + evenSide;
+        } else {
+            return evenSide + evenSide + bigger;
+        }
+    }
+
     public static void main(String[] args){
-        System.out.print(multiplicationHelper(100,100000));
+        System.out.print(multiplicationBetterSolution(2,3));
     }
 
 }
