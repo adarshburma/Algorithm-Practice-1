@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /*
  * Permutations without repetitions/ Duplicates
- * 
+ *
  *
  * */
 
@@ -71,9 +71,34 @@ public class PermutationWithoutDups {
         return permutations;
     }
 
+    static ArrayList<String> getPerms(String str){
+        if(str == null) {
+            return null;
+        }
+
+        ArrayList<String> permutations = new ArrayList<>();
+        getPermsHelper("", str, permutations);
+        return permutations;
+    }
+
+    static void getPermsHelper(String prefix, String str, ArrayList<String> res){
+        if(str.length() == 0 ){
+            res.add(prefix);
+        }
+
+        for(int i = 0 ; i < str.length(); i++){
+            String before = str.substring(0,i);
+            String after = str.substring(i+1);
+            char c = str.charAt(i);
+            getPermsHelper(prefix+ c, before+after, res);
+
+        }
+    }
+
     public static void main(String[] args){
         System.out.println(permutations("ROAD"));
         System.out.println(permutationsPrepend("ROAD"));
+        System.out.println(getPerms("ROAD"));
    }
 
 }
