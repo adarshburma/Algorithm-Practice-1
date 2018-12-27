@@ -1,3 +1,10 @@
+/*
+Time Complexity O(kn * log(k))
+
+k- number of arrays
+n- elements in each of k arrays.
+*/
+
 package org.practice.courses.courseapi.practice12;
 
 
