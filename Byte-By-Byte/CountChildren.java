@@ -42,20 +42,20 @@ public class CountChildren {
         }
     }
 
-    static void dfs(Node root){
+    static void dfsHelper(Node root){
         if(root == null) return;
 
-        int left = dfs(root.left, 0);
-        int right = dfs(root.right, 0);
+        int left = dfs(root.left);
+        int right = dfs(root.right);
 
         root.children = left + right;
         removeNullCount(root);
     }
 
-    static int dfs(Node root, int length) {
+    static int dfs(Node root) {
         if(root == null) return 1;
-        int left = dfs(root.left, length);
-        int right = dfs(root.right, length);
+        int left = dfs(root.left);
+        int right = dfs(root.right);
         root.children = left + right;
         return root.children;
     }
@@ -105,7 +105,7 @@ public class CountChildren {
         root2.right.right = new Node(8);
 
         print(root2);
-        dfs(root2);
+        dfsHelper(root2);
         printChildren(root2);
     }
 }
