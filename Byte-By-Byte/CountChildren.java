@@ -49,28 +49,28 @@ public class CountChildren {
         int right = dfs(root.right);
 
         root.children = left + right;
-        removeNullCount(root);
+        //removeNullCount(root);
     }
 
     static int dfs(Node root) {
-        if(root == null) return 1;
+        if(root.left == null && root.right == null) return 1;
         int left = dfs(root.left);
         int right = dfs(root.right);
-        root.children = left + right;
+        root.children = 1+ left + right;
         return root.children;
     }
 
-    static void removeNullCount(Node root){
-        if(root.left != null){
-            removeNullCount(root.left);
-        }
-
-        root.children = root.children-2;
-
-        if(root.right != null){
-            removeNullCount(root.right);
-        }
-    }
+//    static void removeNullCount(Node root){
+////        if(root.left != null){
+////            removeNullCount(root.left);
+////        }
+////
+////        root.children = root.children-2;
+////
+////        if(root.right != null){
+////            removeNullCount(root.right);
+////        }
+////    }
 
     static void printChildren(Node root){
         if(root.left != null){
