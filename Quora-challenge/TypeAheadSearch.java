@@ -172,11 +172,25 @@ public class TypeAheadSearch {
     });
 
    static void delete(String label){
+       TreeMap<Node, String> newCache = new TreeMap<>(new Comparator<Node>() {
+           @Override
+           public int compare(Node o1, Node o2) {
+               if(o1.score > o2.score){
+                   return -1;
+               } else {
+                   return 1;
+               }
+           }
+       });
        for(Node node : cache.keySet()){
            if(node.label.equals(label)){
-               cache.remove(node);
+               continue;
            }
+           newCache.put(node, node.label);
        }
+
+       cache.clear();
+       cache = newCache;
    }
 
    static List<String> query(int count, String[] queryStrings){
@@ -290,3 +304,4 @@ public class TypeAheadSearch {
    }
 
 }
+
