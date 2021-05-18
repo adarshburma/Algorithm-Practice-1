@@ -1,0 +1,45 @@
+/* https://leetcode.com/problems/meeting-rooms-ii/ */
+
+public int minMeetingRooms(int[][] intervals) {
+        // minimum there 1 room is required 
+        int minRooms = 1;
+        // if there is only 1 meeting we need only 1 room
+        if(intervals.length == 1) {
+            return minRooms;
+        }
+        
+        // minHeap holds all active meetings at any given time.
+        // heap is sorted based of end times as meeting with lesser end time ends first and can be removed.
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>(new Comparator<int[]>() {
+            @Override public int compare(final int[] o1, final int[] o2) {
+                return o1[1] - o2[1];
+            }
+        });
+        
+        // Meeting with lesser start time is assigned first
+        Arrays.sort(intervals, new Comparator<int[]>(){
+            @Override public int compare(final int[] o1, final int[] o2) {
+                return o1[0] - o2[0];
+            }
+        });
+        
+        // first meeting
+        minHeap.offer(intervals[0]);
+        
+        // if the incoming meeting start time is after lowest end time there is no conflict we can still use single room.
+        // we remove meeting with smallest end time in this case.
+        for(int i= 1; i < intervals.length; i++) {
+            if(minHeap.peek()[1] <= intervals[i][0]) {
+                minHeap.poll();
+            }
+            
+            minHeap.offer(intervals[i]);
+            // Size of heap gives us minimum rooms required at any given time.
+            minRooms = Math.max(minRooms, minHeap.size());
+            
+        }
+        return minRooms;
+    }
+    // n -> len(intervals)
+    // time : O(n log n) -> sorting time
+    // space : O(n) -> all meetings can conflict in worst case and each would need separate room 
